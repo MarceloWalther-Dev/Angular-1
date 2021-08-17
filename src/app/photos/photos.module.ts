@@ -1,8 +1,11 @@
-import { NgModule } from "@angular/core";
-import { PhotoComponent } from "./photo/photo.component";
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+
+import { PhotoListComponent } from './photo-list/photo-list.component';
+import { PhotoComponent } from './photo/photo.component';
 
 @NgModule({
-  declarations: [ PhotoComponent ],  // tudo que esta dentro de declarations está privado
-  exports: [ PhotoComponent ]    // tudo que esta dento de exports está publico
+  declarations: [ PhotoComponent, PhotoListComponent ],  // tudo que esta dentro de declarations está privado
+  imports: [ HttpClientModule ]
 })
 export class PhotosModule{}
