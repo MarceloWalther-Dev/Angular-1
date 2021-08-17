@@ -1,1 +1,22 @@
+<div class="text-center mt-3 mb-3">
+  <form>
+      <input
+          class="rounded"
+          type="search"
+          placeholder="search..."
+          autofocus
+          (keyup)="filter = $event.target.value"
+          >
+  </form>
+</div>
+
+{{filter}}
+
 <app-photos [photos]="photos" ></app-photos>
+
+
+
+
+<!-- estou dizendo que a minha variavel filter na linha 9 vai receber o valor do evento keyup -->
+<!-- () comunicação da view com o component.ts -->
+<!-- [] comunicação do componente.ts com a view -->
