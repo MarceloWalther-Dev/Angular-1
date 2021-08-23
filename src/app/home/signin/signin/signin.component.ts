@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/auth.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { PlataformDetectorService } from 'src/app/core/plataform-detector/plataform-detector.service';
 
 @Component({
   templateUrl: './signin.component.html'
@@ -9,11 +10,13 @@ import { AuthService } from 'src/app/core/auth.service';
 export class SignInComponent implements OnInit {
 
   loginForm: FormGroup;
+  @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private plataformDetectorService: PlataformDetectorService
     ){}
 
 
@@ -39,8 +42,8 @@ export class SignInComponent implements OnInit {
           this.router.navigate(['user', userName])
         },
         error =>{
-          console.log('error ao se authenticar  '+ error.status)
-          console.log(typeof(error))
+          alert(error.error.message);
+          this.verificaRenderDaPaginaAcessaElementoDom()
           this.limparFormulario();
         }
       )
@@ -50,4 +53,8 @@ export class SignInComponent implements OnInit {
     this.loginForm.reset();
   }
 
+
+  verificaRenderDaPaginaAcessaElementoDom(){
+    this.plataformDetectorService.isPlataformBrowser() &&  this.userNameInput.nativeElement.focus();
+  }
 }

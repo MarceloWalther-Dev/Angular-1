@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 
 
@@ -15,6 +16,16 @@ export class AuthService {
   constructor(private http: HttpClient) {  }
 
   authenticate(userName: string, password: string){
-    return  this.http.post(`${API_URL}/user/login`, {userName: userName, password: password})
+    return  this.http.post(
+      `${API_URL}/user/login`,
+      {userName: userName, password: password},
+      {observe: 'response'}
+      )
+      .pipe(
+        tap(res =>{
+          const authToken = res.headers.get('x-access-token');
+          console.log(authToken);
+        })
+      )
   }
 }
