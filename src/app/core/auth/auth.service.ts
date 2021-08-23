@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { TokenService } from '../token/token.service';
 
 
 
@@ -13,7 +14,10 @@ const API_URL = 'http://localhost:3000';
 export class AuthService {
 
 
-  constructor(private http: HttpClient) {  }
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+    ) {  }
 
   authenticate(userName: string, password: string){
     return  this.http.post(
@@ -24,10 +28,7 @@ export class AuthService {
       .pipe(
         tap(res =>{
           const authToken = res.headers.get('x-access-token');
-          // window.localStorage.setItem('authToken', authToken);  armazenando o token no local store e capturando ele
-          // console.log(localStorage.getItem('authToken'));
-
-
+          this.tokenService.setToken(authToken);
         })
       )
   }
