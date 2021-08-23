@@ -1,22 +1,33 @@
 <h4 class="text-center">Login</h4>
 
-<form class="form mt-4">
+<form [formGroup]="loginForm" class="form mt-4" (submit)="login()">
 
     <div class="form-group">
-        <input
+        <input formControlName="userName"
             class="form-control"
             placeholder="user name"
             autofocus>
+
+            <app-vmessage
+              *ngIf="loginForm.get('userName').errors?.required"
+              title="User name is required!"
+            ></app-vmessage>
     </div>
 
     <div class="form-group">
-        <input
+        <input formControlName="password"
             type="password"
             class="form-control"
             placeholder="password">
+
+            <app-vmessage
+              *ngIf="loginForm.get('password').errors?.required"
+              title=" Password is required!"
+            ></app-vmessage>
     </div>
 
     <button
+         [disabled]="loginForm.invalid"
         type="submit"
         class="btn btn-primary btn-block">
         login
@@ -25,3 +36,7 @@
 </form>
 
 <p>Not a user?<a>Register now</a></p>
+
+
+
+<!-- [disabled]="loginForm.invalid" Desabilitando o botão, só sera liberado depois que os campos forem preenchidos -->
