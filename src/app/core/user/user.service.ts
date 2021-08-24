@@ -25,6 +25,12 @@ export class UserService {
     return this.userSubject.asObservable();
   }
 
+
+  logout(){
+    this.tokenService.removeToken();
+    this.userSubject.next(null);
+  }
+
   private decodeAndNotify(): void{
     const token = this.tokenService.getToken();
     const user = jwt_decode(token) as User; //as User é um cast pq o jwt-decode não sabe o que está dentro do token por isso que o retorno dele é unknown
