@@ -1,3 +1,4 @@
+import { SingupComponent } from './home/singup/singup.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/auth/auth.guard';
@@ -16,6 +17,10 @@ const routes: Routes = [
     path:'',
     component: SignInComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path:'signup',
+    component: SingupComponent,
   },
   {
      path:'user/:userName',
