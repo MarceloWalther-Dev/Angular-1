@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PlataformDetectorService } from 'src/app/core/plataform-detector/plataform-detector.service';
 import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
+import { NewUser } from './new-user';
+import { SignUpService } from './singup.service';
 import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
 
 @Component({
@@ -9,13 +13,16 @@ import { UserNotTakenValidatorService } from './user-not-taken.validator.service
 })
 export class SingupComponent implements OnInit {
 
+  @ViewChild('inputEmail') inputEmail: ElementRef<HTMLInputElement>;
   signupForm: FormGroup;
 
   constructor(
 
     private formBuilder: FormBuilder,
-    private userNotTakenValidatorService: UserNotTakenValidatorService
-
+    private userNotTakenValidatorService: UserNotTakenValidatorService,
+    private router: Router,
+    private service: SignUpService,
+    private plataformDetectorService: PlataformDetectorService
     ) {
 
   }
@@ -53,7 +60,21 @@ export class SingupComponent implements OnInit {
   }
 
   signup(){
+    const newUser = this.signupForm.getRawValue() as NewUser; // getRawValue() me entrega todos os campos do formulario com os valores quando digitado.
+    this.service
+      .signup(newUser)
+      .subscribe(
+        ()=>{
+          this.router.navigate(['']);
+        },
+        error=>{
+          console.group(error)
+        }
+        )
+  }
 
+  verificaRenderDaPaginaAcessaElementoDom(){
+    this.plataformDetectorService.isPlataformBrowser() &&  this.inputEmail.nativeElement.focus();
   }
 
 }

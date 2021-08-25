@@ -1,13 +1,11 @@
-import { SingupComponent } from './home/singup/singup.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './core/auth/auth.guard';
 
 import { NotFoundComponent } from './errors/not-found/not-found.component';
-import { SignInComponent } from './home/signin/signin/signin.component';
 import { PhotoListComponent } from './photos/photo-list/photo-list.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { PhotosFormComponent } from './photos/photos-form/photos-form.component';
+
 
 
 
@@ -15,12 +13,12 @@ const routes: Routes = [
 
   {
     path:'',
-    component: SignInComponent,
-    canActivate: [AuthGuard]
+    pathMatch:'full',
+    redirectTo:'home'
   },
   {
-    path:'signup',
-    component: SingupComponent,
+    path:'home',
+    loadChildren:'./home/home.module#HomeModule'
   },
   {
      path:'user/:userName',
