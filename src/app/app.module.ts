@@ -15,11 +15,10 @@ import { PhotosModule } from './photos/photos.module';
   ],
   imports: [ // só entra module
     BrowserModule,
-    AppRoutingModule,
     PhotosModule,
     ErrorsModule,
-    HomeModule,
-    CoreModule
+    CoreModule,
+    AppRoutingModule,
   ],
   providers: [  ],
   bootstrap: [AppComponent]
