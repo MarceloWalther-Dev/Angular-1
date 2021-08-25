@@ -27,7 +27,7 @@ export class SignInComponent implements OnInit {
       password: ['', Validators.required]
 
     });
-    this.verificaRenderDaPaginaAcessaElementoDom();
+
   }
 
   login(){

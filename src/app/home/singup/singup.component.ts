@@ -10,6 +10,7 @@ import { UserNotTakenValidatorService } from './user-not-taken.validator.service
 @Component({
   selector: 'app-singup',
   templateUrl: './singup.component.html',
+  providers:[ UserNotTakenValidatorService ]
 })
 export class SingupComponent implements OnInit {
 
