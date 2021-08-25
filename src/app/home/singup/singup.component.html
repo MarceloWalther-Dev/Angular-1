@@ -48,10 +48,10 @@
         title="User name is pattern!"
       ></app-vmessage>
 
-      <ap-vmessage
-        title="Username already taken"
-        *ngIf="signupForm.get('userName').errors?.userNameTaken">
-      </ap-vmessage>
+      <app-vmessage
+      *ngIf="signupForm.get('userName').errors?.userNameTaken"
+      title="Username already taken">
+      </app-vmessage>
       <small *ngIf="signupForm.get('userName').valid" class="text-success">User available</small>
     </div>
 
