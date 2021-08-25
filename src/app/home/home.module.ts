@@ -7,6 +7,7 @@ import { SingupComponent } from './singup/singup.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing.module';
+import { SignUpService } from './singup/singup.service';
 
 
 
@@ -17,8 +18,10 @@ import { HomeRoutingModule } from './home.routing.module';
     FormsModule,
     ReactiveFormsModule,
     VmessageModule,
-    HomeRoutingModule,
     RouterModule,
-  ]
+    HomeRoutingModule
+  ],
+  providers: [ SignUpService ]
 })
 export class HomeModule { }
+
