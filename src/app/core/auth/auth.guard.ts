@@ -9,20 +9,19 @@ import { UserService } from '../user/user.service';
 export class AuthGuard implements CanActivate {
 
 
-  constructor(private userService: UserService, private router: Router){
+  constructor(private userService: UserService, private router: Router){}
 
-  }
 
 
   canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot){
+    router: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      if(this.userService.isLogged()){
-          this.router.navigate(['user', this.userService.getUserName()]);
-          return false;
-      }
-      return true;
+      if(!this.userService.isLogged()){
+        this.router.navigate(['']);
+        return false;
+    }
+    return true;
   }
 
 }
